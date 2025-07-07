@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 18%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 152 75% 40%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 60%;
+    --radius: 0.5rem;
+    
+    /* Chart colors */
+    --chart-1: 217 91% 60%;  /* blue-500 */
+    --chart-2: 152 75% 40%;  /* emerald-500 */
+    --chart-3: 38 92% 50%;   /* amber-500 */
+    --chart-4: 244 81% 69%;  /* indigo-500 */
+    --chart-5: 271 91% 65%;  /* violet-500 */
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Remove arrows from number inputs */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  /* Custom scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground) / 0.2);
+    border: 3px solid hsl(var(--background));
+    border-radius: 8px;
+    background-clip: padding-box;
+    min-height: 40px;
+    min-width: 40px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+    border-width: 2px;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: hsl(var(--background));
+  }
+
+  /* Firefox scrollbar styles */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.2) hsl(var(--background));
+  }
+
+  /* Table layout styles */
+  .table-wrapper {
+    @apply relative flex flex-col rounded-lg bg-background;
+  }
+
+  .table-content {
+    @apply overflow-hidden relative rounded-lg border border-border;
+  }
+
+  .table-scroll-container {
+    @apply relative overflow-auto rounded-lg bg-background;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .table-footer {
+    @apply border-t border-border bg-background p-4 rounded-b-lg;
+  }
+
+  /* Sticky header styles */
+  .sticky-header {
+    @apply sticky top-0 z-20 bg-background border-b border-border;
+    position: sticky;
+    top: 0;
+  }
+
+  .sticky-header th {
+    @apply bg-inherit sticky top-0 z-20;
+    position: sticky;
+    top: 0;
+  }
+
+  /* Loading indicator */
+  .loading-indicator {
+    @apply absolute right-0 top-0 bottom-0 w-16 pointer-events-none;
+    background: linear-gradient(to right, transparent, hsl(var(--background)));
+  }
+
+  .loading-dot {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+    @apply w-2 h-2 bg-primary rounded-full;
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Card styles */
+  .dashboard-card {
+    @apply bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
